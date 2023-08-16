@@ -6,10 +6,6 @@ A simple interactive command-line interface that allows the user to navigate dir
 
 - [About](#about)
 - [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## About
 
