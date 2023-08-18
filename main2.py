@@ -1,10 +1,10 @@
-import os, shutil
+import os, shutil, datetime
 
 def list_files():
     os.system("dir")
 
 def show_help():
-    print("Commands are exit, open, list, clear, back, help, mkfile, mkdir, move")
+    print("Commands are exit, open, list, clear, back, help, mkfile, mkdir, move, rename, copy, search, info")
     
 
 running = True
@@ -52,8 +52,17 @@ while running:
             print(f"Help for '{command}': Delete a file or folder.")
         elif command == 'move':
             print(f"Help for '{command}': Move a file to a different location.")
+        elif command == 'rename':
+            print(f"Help for '{command}': Rename a file or folder.")
+        elif command == 'copy':
+            print(f"Help for '{command}': Copy a file or folder.")
+        elif command == 'search':
+            print(f"Help for '{command}': Search for a file in the current directory and its subdirectories.")
+        elif command == 'info':
+            print(f"Help for '{command}': Get information about a file, including size and timestamps.")
         else:
             print("Unknown Command or No command specified. Use 'help' followed by a command name to get assistance.")
+
         
     
     elif userinput.startswith('open '):
@@ -115,7 +124,6 @@ while running:
                 print(f'An error occurred: {e}')
 
     elif userinput.startswith('move '):
-        #selectFile = userinput[5:]
         command_parts = userinput.split(' ', 2)
         if len(command_parts) == 3:
             sorce = command_parts[1]
@@ -127,9 +135,74 @@ while running:
                 print(f'Moved "{sorce}" to "{destination}"')
             except Exception as e:
                 print(f'An error occurred: {e}')
+
+    elif userinput.startswith('rename '):
+        command_parts = userinput.split(' ', 2)
+        if len(command_parts) == 3:
+            old_name = command_parts[1]
+            new_name = command_parts[2]
+
+            if os.path.exists(old_name):
+                try:
+                    os.rename(old_name, new_name)
+                    os.system("clear")
+                    list_files()
+                    print(f'Renamed "{old_name}" to "{new_name}"')
+                except Exception as e:
+                    print(f'An error occurred: {e}')
+            else:
+                print(f'File or folder "{old_name}" does not exist.')
+        
+    elif userinput.startswith('copy '):
+        command_parts = userinput.split(' ', 2)
+        if len(command_parts) == 3:
+            source = command_parts[1]
+            destination = command_parts[2]
+
+            if os.path.exists(source):
+                try:
+                    shutil.copy(source, destination)
+                    os.system("clear")
+                    list_files()
+                    print(f'Copied "{source}" to "{destination}"')
+                except Exception as e:
+                    print(f'An error occurred: {e}')
+            else:
+                print(f'Source file or folder "{source}" does not exist.')
+    
+    elif userinput.startswith('search '):
+        filename = userinput[7:]
+
+        def search_file(start_dir, filename):
+            for root, dirs, files in os.walk(start_dir):
+                if filename in files:
+                    return os.path.join(root, filename)
+            return None
+
+        result = search_file(os.getcwd(), filename)
+        if result:
+            print(f'File "{filename}" found at: {result}')
+        else:
+            print(f'File "{filename}" not found.')
+    
+    elif userinput.startswith('info '):
+        filename = userinput[5:].strip()
+        if os.path.exists(filename):
+            try:
+                file_info = os.stat(filename)
+                size_mb = file_info.st_size / (1024 * 1024)
+                print(f'Info for "{filename}":')
+                print(f'  Size: {size_mb} mb')
+                print(f'  Created: {datetime.datetime.fromtimestamp(file_info.st_ctime).strftime("%Y-%m-%d %H:%M:%S")}')
+                print(f'  Modified: {datetime.datetime.fromtimestamp(file_info.st_mtime).strftime("%Y-%m-%d %H:%M:%S")}')
+                print(f'  Accessed: {datetime.datetime.fromtimestamp(file_info.st_atime).strftime("%Y-%m-%d %H:%M:%S")}')
+
+            except Exception as e:
+                print(f'An error occurred: {e}')
+        else:
+            print(f'File "{filename}" not found.')
     
     else: 
         print("Unknown Command, Use help command")
-    
     
 print("Goodbye!")
