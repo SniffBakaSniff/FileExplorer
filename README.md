@@ -19,4 +19,8 @@ Explore what FileExplorer can do:
 - `mkfile <filename>`: Make a new file with a specific name and extension.
 - `rm <path>`: Delete a file or folder.
 - `move <source> <destination>`: Move a file to a different location.
+- `rename <oldname> <newname>`: Rename a file or folder.
+- `copy <source> <destination>`: Copy a file or folder.
+- `search <filename>`: Search for a file in the current directory and its subdirectories.
+- `info <filename>`: Get information about a file, including size and timestamps.
 
