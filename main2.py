@@ -5,9 +5,9 @@ def list_files():
 
 def show_help():
     print("Commands are exit, open, list, clear, back, help, mkfile, mkdir, move, rename, copy, search, info")
-    
 
 running = True
+os.chdir(os.path.expanduser("~\\Desktop"))
 list_files()
 
 while running:
