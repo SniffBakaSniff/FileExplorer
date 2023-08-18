@@ -1,17 +1,14 @@
 import os, shutil
 
 def list_files():
-    #os.system("clear")
     os.system("dir")
 
 def show_help():
-    print("Commands are exit, open, list, clear, back, help")
-    userinput = input('Command - ')
-    return userinput
+    print("Commands are exit, open, list, clear, back, help, mkfile, mkdir, move")
+    
 
 running = True
 list_files()
-#userinput = input('Command - ')
 
 while running:
     userinput = input('Command - ')
@@ -31,7 +28,33 @@ while running:
         os.system('clear')
     
     elif userinput == 'help':
-        userinput = show_help()
+        show_help()
+
+    elif userinput.startswith('help '):
+        command = userinput[5:]
+        if command == 'help':
+            print(f"Help for '{command}': Get help with commands for FileExplorer program.")
+        elif command == 'exit':
+            print(f"Help for '{command}': Terminate the FileExplorer program.")
+        elif command == 'open':
+            print(f"Help for '{command}': Open a specific file using your computer's default program.")
+        elif command == 'list':
+            print(f"Help for '{command}': See a clear list of files and folders in the current directory.")
+        elif command == 'clear':
+            print(f"Help for '{command}': Clean up the screen for a neat interface.")
+        elif command == 'back':
+            print(f"Help for '{command}': Go up one level in the directory structure.")
+        elif command == 'mkdir':
+            print(f"Help for '{command}': Create a new folder with a custom name.")
+        elif command == 'mkfile':
+            print(f"Help for '{command}': Make a new file with a specific name and extension.")
+        elif command == 'rm':
+            print(f"Help for '{command}': Delete a file or folder.")
+        elif command == 'move':
+            print(f"Help for '{command}': Move a file to a different location.")
+        else:
+            print("Unknown Command or No command specified. Use 'help' followed by a command name to get assistance.")
+        
     
     elif userinput.startswith('open '):
         selectFile = userinput[5:]    
