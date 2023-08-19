@@ -14,7 +14,7 @@ while running:
     userinput = input('Command - ')
 
     if userinput == 'back':
-        os.system("clear")
+        os.system("cls")
         os.chdir("..")
         list_files()
     
@@ -25,7 +25,7 @@ while running:
         list_files()
     
     elif userinput == 'clear':
-        os.system('clear')
+        os.system('cls')
     
     elif userinput == 'help':
         show_help()
@@ -39,7 +39,7 @@ while running:
         elif command == 'open':
             print(f"Help for '{command}': Open a specific file using your computer's default program.")
         elif command == 'list':
-            print(f"Help for '{command}': See a clear list of files and folders in the current directory.")
+            print(f"Help for '{command}': See a list of files and folders in the current directory.")
         elif command == 'clear':
             print(f"Help for '{command}': Clean up the screen for a neat interface.")
         elif command == 'back':
@@ -73,7 +73,7 @@ while running:
                 list_files
             elif os.path.isdir(selectFile):
                 os.chdir(selectFile)
-                os.system("clear")
+                os.system("cls")
                 list_files()
             else:
                 print(f'Unknown file or folder type: {selectFile}')
@@ -85,12 +85,12 @@ while running:
         if os.path.exists(selectFile):
             if os.path.isfile(selectFile):
                 os.remove(selectFile)
-                os.system("clear")
+                os.system("cls")
                 list_files()
             elif os.path.isdir(selectFile):
                 try:
                     os.removedirs(selectFile)
-                    os.system("clear")
+                    os.system("cls")
                     list_files()
                 except OSError as e:
                     print(f'Error deleting directory "{selectFile}": {e}')
@@ -103,7 +103,7 @@ while running:
         dirName = userinput[6:]
         try:
             os.mkdir(dirName)
-            os.system("clear")
+            os.system("cls")
             list_files()
             print(f'Directory "{dirName}" has been created.')
         except Exception as e:
@@ -117,7 +117,7 @@ while running:
             try:
                 with open(File_Path, 'w') as file:
                     file.write('')
-                os.system("clear")
+                os.system("cls")
                 list_files()
                 print(f'File "{File_Path}" has been created.')
             except Exception as e:
@@ -130,7 +130,7 @@ while running:
             destination = command_parts[2]
             try:
                 shutil.move(sorce, destination)
-                os.system("clear")
+                os.system("cls")
                 list_files()
                 print(f'Moved "{sorce}" to "{destination}"')
             except Exception as e:
@@ -145,7 +145,7 @@ while running:
             if os.path.exists(old_name):
                 try:
                     os.rename(old_name, new_name)
-                    os.system("clear")
+                    os.system("cls")
                     list_files()
                     print(f'Renamed "{old_name}" to "{new_name}"')
                 except Exception as e:
@@ -162,7 +162,7 @@ while running:
             if os.path.exists(source):
                 try:
                     shutil.copy(source, destination)
-                    os.system("clear")
+                    os.system("cls")
                     list_files()
                     print(f'Copied "{source}" to "{destination}"')
                 except Exception as e:
